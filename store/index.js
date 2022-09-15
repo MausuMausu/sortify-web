@@ -1,5 +1,6 @@
 export const state = () => ({
   lists: {},
+  pairs: {}
 })
 
 export const getters = {
@@ -9,8 +10,12 @@ export const getters = {
 }
 
 export const mutations = {
-  addList(state, list ) {
+  addList(state, list) {
     state.lists = { ...state.lists, ...list }
+  },
+  addListPair(state, pairs) {
+    console.log({ ...state.pairs, ...pairs })
+    state.pairs = { ...state.pairs, ...pairs }
   }
 }
 
