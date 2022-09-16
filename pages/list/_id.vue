@@ -45,7 +45,7 @@
 
 <script>
 
-import {Item,Pair} from "~/model/comparison";
+import {Item, Pair} from "~/model/comparison";
 
 
 export default {

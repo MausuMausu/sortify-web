@@ -1,7 +1,13 @@
 <template>
   <v-container class="mt-16">
+        <ul>
+          <li v-for="(item, index) in list" :key="index">
+            {{ item.value }} - {{ item.score }}
+          </li>
+        </ul>
     <v-row no-gutters>
-        <p>{{ $store.state.lists[$route.params.id] }}</p>
+        <!-- <p>{{ pairs[currentPair] }}</p> -->
+        <!-- <p>{{ list }}</p> -->
       <template>
         <v-col @click="squareOne">
           <v-card
@@ -11,7 +17,7 @@
             tile
             align="center"
           >
-            {{ $store.state.pairs }}
+            {{ item1.value }} -- {{ this.list.find(item => item.value === this.item1.value)?.score }}
           </v-card>
         </v-col>
         <v-responsive width="100%"></v-responsive>
@@ -19,7 +25,7 @@
     </v-row>
     <v-row no-gutters>
       <template>
-        <v-col @click="squareOne">
+        <v-col>
           <div
             id="vs"
             class="pa-10"
@@ -41,7 +47,7 @@
             tile
             align="center"
           >
-            Column
+            {{ item2.value }} -- {{ this.list.find(item => item.value === this.item2.value)?.score }}
           </v-card>
         </v-col>
         <v-responsive width="100%"></v-responsive>
@@ -52,20 +58,41 @@
 
 <script>
 export default {
-  // data() {
-  //   return {
-  //     listName: ""
-  //   }
-  // },
+  data() {
+    return {
+      currentPair: 0,
+      pairs: [],
+      list: []
+    }
+  },
+  computed: {
+    item1 () {
+      return this.pairs[this.currentPair]?.item1 || {}
+    },
+    item2 () {
+      return this.pairs[this.currentPair]?.item2 || {}
+    },
+  },
+  created () {
+    this.pairs = JSON.parse(JSON.stringify(this.$store.state.pairs[this.$route.params.id]))
+    this.list = JSON.parse(JSON.stringify(this.$store.state.lists[this.$route.params.id]))
+  },
   methods: {
     squareOne() {
-      console.log('test 1')
-      console.log('pairs: ', this.$store.state.pairs)
+      this.list.find(item => item.value === this.item1.value).score += (1 + this.list.find(item => item.value === this.item2.value).score)
+      this.currentPair++
+      if (this.currentPair > this.pairs.length - 1) {
+        this.$store.commit('addList', { [this.$route.params.id]: this.list })
+      }
     },
     squareTwo() {
-      console.log('test 2')
+      this.list.find(item => item.value === this.item2.value).score += (1 + this.list.find(item => item.value === this.item1.value).score)
+      this.currentPair++
+      if (this.currentPair > this.pairs.length - 1) {
+        this.$store.commit('addList', { [this.$route.params.id]: this.list })
+      }
     }
-  }
+  },
 
 }
 </script>
