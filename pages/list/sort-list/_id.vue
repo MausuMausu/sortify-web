@@ -1,12 +1,12 @@
 <template>
   <v-container class="mt-16">
-    <h1 align="center">{{ $route.params.id }}</h1>
+    <h1 align="center" class="pb-8">{{ $route.params.id }}</h1>
     <v-row no-gutters>
       <template>
         <v-col @click="squareOne">
           <v-card
             id="squareOne"
-            class="pa-10"
+            class="pa-10 rounded-lg"
             outlined
             tile
             align="center"
@@ -27,7 +27,7 @@
             class="pa-10"
             align="center"
           >
-            VS
+            OR
           </div>
         </v-col>
         <v-responsive width="100%"></v-responsive>
@@ -38,7 +38,7 @@
         <v-col @click="squareTwo">
           <v-card
             id="squareTwo"
-            class="pa-10"
+            class="pa-10 rounded-lg"
             outlined
             tile
             align="center"
@@ -106,23 +106,27 @@ export default {
 }
 
 #squareOne {
-  background-color: #7DDF64;
+  background-color: aliceblue;
   border-radius: 50px;
 }
+
+/*#squareOne:hover {*/
+/*  background-color: hotpink;*/
+/*}*/
 
 #text {
   color: black;
 }
 
-#vs {
+#or {
   padding-bottom: 10%;
-  color: #fc8749;
+  color: aliceblue;
   font-size: 24px;
   font-weight: 700;
 }
 
 #squareTwo {
-  background-color: #ED4D6E;
+  background-color: aliceblue;
   border-radius: 30px;
 }
 

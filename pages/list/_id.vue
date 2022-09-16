@@ -25,7 +25,7 @@
       v-model="dialogActive"
       transition="dialog-transition"
     >
-      <v-row justify="end" class="my-4 px-4">
+      <v-row justify="end" class="my-4 px-4" id="modal">
         <v-col cols="12">
           <v-text-field
             v-model="newItem"
@@ -51,7 +51,7 @@ import {Item, Pair} from "~/model/comparison";
 export default {
   data () {
     return {
-      dialogActive: true,
+      dialogActive: false,
       newItem: "",
       items: [],
       pairs: [],
@@ -64,22 +64,9 @@ export default {
     },
     notVotedPairs() {
       return this.pairs.filter(pair => !pair.voted);
-    },
-    nextNotVotedPair() {
-      return this.notVotedPairs.length > 0 ? this.notVotedPairs[0] : null;
-    },
-    allPairsVoted() {
-      return this.pairs.length > 0 && this.notVotedPairs.length === 0;
     }
   },
   methods: {
-    // addItem() {
-    //   const newItem = new Item(this.newItem);
-    //   for (const item of this.items) {
-    //     this.pairs.push(new Pair(item, newItem));
-    //   }
-    //   this.items.push(newItem);
-    // },
     addItem() {
       if (!this.newItem) {
         return;
@@ -100,3 +87,11 @@ export default {
   }
 }
 </script>
+
+<style>
+
+#modal {
+  background-color: #212121;
+}
+
+</style>

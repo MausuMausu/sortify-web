@@ -4,8 +4,8 @@
       <v-text-field
         v-model="listName"
         label="List Name"
+        placeholder="Enter..."
       ></v-text-field>
-      <!-- <v-btn @click="createList" color="primary">Create List</v-btn> -->
       <v-btn router exact :to="`list/${listName}`" color="primary">Create List</v-btn>
     </v-col>
   </v-row>

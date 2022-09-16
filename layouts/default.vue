@@ -1,7 +1,7 @@
 <template>
   <v-app dark>
     <v-app-bar :clipped-left="clipped" fixed app>
-      <v-toolbar-title v-text="title" />
+      <v-toolbar-title v-text="title" @click="goToHome()" />
       <v-spacer />
     </v-app-bar>
     <v-main>
@@ -9,9 +9,6 @@
         <Nuxt />
       </v-container>
     </v-main>
-    <!-- <v-footer :absolute="!fixed" app>
-      <span>&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer> -->
   </v-app>
 </template>
 
@@ -41,6 +38,11 @@ export default {
       title: 'WOLF LIST',
     }
   },
+  methods: {
+    goToHome () {
+      this.$router.push({ path: '/' })
+    }
+  }
 }
 </script>
 
