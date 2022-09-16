@@ -4,22 +4,22 @@
     <v-divider />
     <!-- <nuxt-child/> -->
     <v-btn
-      @click="dialogActive = true"
       style="position: absolute; bottom: 24px; right: 24px"
       rounded
       fab
       color="primary"
+      @click="dialogActive = true"
     >
       <v-icon>mdi-plus</v-icon>
     </v-btn>
 
     <ul>
-      <li :key="index" v-for="(item, index) in items">
+      <li v-for="(item, index) in items" :key="index">
         {{ item.value }}
       </li>
     </ul>
 
-    <v-btn class="mt-4" @click="goToSorting" color="primary">Start Sorting</v-btn>
+    <v-btn class="mt-4" color="primary" @click="goToSorting">Start Sorting</v-btn>
 
     <v-dialog
       v-model="dialogActive"
@@ -33,10 +33,10 @@
           ></v-text-field>
         </v-col>
         <v-col cols="auto">
-          <v-btn @click="dialogActive = false" outlined>Done</v-btn>
+          <v-btn outlined @click="dialogActive = false">Done</v-btn>
         </v-col>
         <v-col cols="auto">
-          <v-btn @click="addItem()" color="primary">Add</v-btn>
+          <v-btn color="primary" @click="addItem()">Add</v-btn>
         </v-col>
       </v-row>
     </v-dialog>
@@ -45,8 +45,8 @@
 
 <script>
 
-import {Item} from "~/model/comparison";
-import {Pair} from "~/model/comparison";
+import {Item,Pair} from "~/model/comparison";
+
 
 export default {
   data () {
@@ -56,6 +56,20 @@ export default {
       items: [],
       pairs: [],
       listName: null
+    }
+  },
+  computed: {
+    sortedItems() {
+      return Array.from(this.items).sort((a, b) => b.score - a.score);
+    },
+    notVotedPairs() {
+      return this.pairs.filter(pair => !pair.voted);
+    },
+    nextNotVotedPair() {
+      return this.notVotedPairs.length > 0 ? this.notVotedPairs[0] : null;
+    },
+    allPairsVoted() {
+      return this.pairs.length > 0 && this.notVotedPairs.length === 0;
     }
   },
   methods: {
@@ -82,20 +96,6 @@ export default {
       this.$store.commit('addList', { [this.$route.params.id]: this.items })
       this.$store.commit('addListPair', { [this.$route.params.id]: this.pairs })
       this.$router.push({ path: `/list/sort-list/${this.$route.params.id}` })
-    }
-  },
-  computed: {
-    sortedItems() {
-      return Array.from(this.items).sort((a, b) => b.score - a.score);
-    },
-    notVotedPairs() {
-      return this.pairs.filter(pair => !pair.voted);
-    },
-    nextNotVotedPair() {
-      return this.notVotedPairs.length > 0 ? this.notVotedPairs[0] : null;
-    },
-    allPairsVoted() {
-      return this.pairs.length > 0 && this.notVotedPairs.length === 0;
     }
   }
 }

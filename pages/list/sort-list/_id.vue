@@ -1,14 +1,14 @@
 <template>
   <v-container class="mt-16">
     <v-row no-gutters>
-        <p>{{ $store.state.lists[this.$route.params.id] }}</p>
+        <p>{{ $store.state.lists[$route.params.id] }}</p>
       <template>
         <v-col @click="squareOne">
           <v-card
+            id="squareOne"
             class="pa-10"
             outlined
             tile
-            id="squareOne"
             align="center"
           >
             {{ $store.state.pairs }}
@@ -21,9 +21,9 @@
       <template>
         <v-col @click="squareOne">
           <div
+            id="vs"
             class="pa-10"
             align="center"
-            id="vs"
           >
             VS
           </div>
@@ -35,10 +35,10 @@
       <template>
         <v-col @click="squareTwo">
           <v-card
+            id="squareTwo"
             class="pa-10"
             outlined
             tile
-            id="squareTwo"
             align="center"
           >
             Column
