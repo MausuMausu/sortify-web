@@ -1,13 +1,7 @@
 <template>
   <v-container class="mt-16">
-        <ul>
-          <li v-for="(item, index) in list" :key="index">
-            {{ item.value }} - {{ item.score }}
-          </li>
-        </ul>
+    <h1 align="center">{{ $route.params.id }}</h1>
     <v-row no-gutters>
-        <!-- <p>{{ pairs[currentPair] }}</p> -->
-        <!-- <p>{{ list }}</p> -->
       <template>
         <v-col @click="squareOne">
           <v-card
@@ -17,7 +11,9 @@
             tile
             align="center"
           >
-            {{ item1.value }} -- {{ this.list.find(item => item.value === this.item1.value)?.score }}
+            <h1 class="text">
+              {{ item1.value }}
+            </h1>
           </v-card>
         </v-col>
         <v-responsive width="100%"></v-responsive>
@@ -47,7 +43,9 @@
             tile
             align="center"
           >
-            {{ item2.value }} -- {{ this.list.find(item => item.value === this.item2.value)?.score }}
+            <h1 class="text">
+              {{ item2.value }}
+            </h1>
           </v-card>
         </v-col>
         <v-responsive width="100%"></v-responsive>
@@ -82,14 +80,18 @@ export default {
       this.list.find(item => item.value === this.item1.value).score += (1 + this.list.find(item => item.value === this.item2.value).score)
       this.currentPair++
       if (this.currentPair > this.pairs.length - 1) {
+        console.log('test 1: ')
         this.$store.commit('addList', { [this.$route.params.id]: this.list })
+        this.$router.push({ path: `/list/winners-list/${this.$route.params.id}` })
       }
     },
     squareTwo() {
       this.list.find(item => item.value === this.item2.value).score += (1 + this.list.find(item => item.value === this.item1.value).score)
       this.currentPair++
       if (this.currentPair > this.pairs.length - 1) {
+        console.log('test 2: ')
         this.$store.commit('addList', { [this.$route.params.id]: this.list })
+        this.$router.push({ path: `/list/winners-list/${this.$route.params.id}` })
       }
     }
   },
@@ -104,22 +106,28 @@ export default {
 }
 
 #squareOne {
-  background-color: #4fc733;
-  /*width: 50px;*/
-  /*height: 200px;*/
+  background-color: #7DDF64;
+  border-radius: 50px;
+}
+
+#text {
+  color: black;
 }
 
 #vs {
   padding-bottom: 10%;
-  color: hotpink;
+  color: #fc8749;
   font-size: 24px;
   font-weight: 700;
 }
 
 #squareTwo {
-  background-color: #ff5959;
-  /*width: 50px;*/
-  /*height: 200px;*/
+  background-color: #ED4D6E;
+  border-radius: 30px;
+}
+
+.text {
+  color: black;
 }
 
 </style>

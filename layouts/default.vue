@@ -38,8 +38,23 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Sortify',
+      title: 'WOLF LIST',
     }
   },
 }
 </script>
+
+<style>
+
+/**{*/
+/*  background-color: #f8f8f8;*/
+/*}*/
+
+#wolf-list {
+  height: 70px;
+  lenght: 70px;
+  padding-left: 10px;
+  padding-top: 20px;
+}
+
+</style>

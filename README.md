@@ -1,4 +1,4 @@
-# sortify-web
+# wolf-list
 
 ## Build Setup
 
